@@ -4,6 +4,8 @@ Site multipágina de uma marca fictícia de bicicletas, feito em 2021 como estud
 
 > Projeto de estudo.
 
+![Página inicial da Bikcraft](img/print-home.png)
+
 ## Páginas
 
 | Página | Arquivo | Conteúdo |
@@ -32,6 +34,8 @@ Bikecraft/
 ├── css/            reset, normalize, grid, estilos por página, responsivo
 ├── js/             script.js + plugins simple-*
 ├── img/
+├── config.php            carrega o .env e helpers de sanitização
+├── .env.example          modelo das variáveis de ambiente
 ├── enviar.php            envio via SMTP (PHPMailer)
 ├── enviar-sendgrid.php   envio via SendGrid
 └── PHPMailer/ , sendgrid-php/   bibliotecas incluídas no repositório
@@ -47,12 +51,50 @@ O formulário precisa de PHP 8:
 php -S localhost:8000
 ```
 
-Antes de usar, preencha em `enviar.php` o e-mail, a senha, o host e a porta SMTP. Nunca versione credenciais reais.
+### Configuração do envio
 
-## Pendências conhecidas
+As credenciais ficam fora do código, em um arquivo `.env` na raiz do projeto:
 
-- O `enviar.php` precisa de ajustes para PHP 8.1 ou mais novo: `FILTER_SANITIZE_STRING` foi descontinuado e há um erro de digitação em `SMTPSecure` (está `"tsl"` em vez de `"tls"`).
-- O CI ainda é um placeholder.
+```bash
+cp .env.example .env
+```
+
+Preencha o `.env` com os dados do seu SMTP (`enviar.php`) ou do SendGrid (`enviar-sendgrid.php`). O `.env` está no `.gitignore` e nunca deve ser versionado. Variáveis já definidas no ambiente do servidor têm prioridade sobre o arquivo.
+
+### Lint e validação
+
+```bash
+npm ci
+npm run lint
+```
+
+O `lint` roda `html-validate` nas páginas e `stylelint` nos CSS. Para checar a sintaxe do PHP: `php -l enviar.php`.
+
+## Testes e CI
+
+O workflow `.github/workflows/ci.yml` roda, a cada push e pull request:
+
+- `html-validate` e `stylelint` (`npm run lint`);
+- `php -l` em todos os arquivos `.php`;
+- Lighthouse CI (`lighthouserc.json`), com metas de 90 em acessibilidade, performance e boas práticas.
+
+## Pendências
+
+- Publicar o site (GitHub Pages) e linkar a URL aqui.
+- Formulário na versão estática (Formspree ou Netlify Forms).
+- Imagens em WebP/AVIF com `srcset` e `loading="lazy"`.
+- Trocar as bibliotecas vendorizadas (`PHPMailer/`, `sendgrid-php/`) por Composer.
+
+## O que aprendi
+
+- Organizar um site multipágina com HTML semântico e menu comum.
+- Criar layout em grid sem framework, com versão responsiva.
+- Escrever plugins de slide e de animação ao rolar sem bibliotecas.
+- Validar formulário no cliente e usar honeypot em vez de CAPTCHA.
+- Enviar e-mail por SMTP e por API, tratando erros e campos vindos do usuário.
+- Tirar credenciais do código e usar variáveis de ambiente.
+- Configurar CI com validação de HTML, CSS, PHP e Lighthouse.
+- Modo escuro com `prefers-color-scheme` e variáveis CSS.
 
 ## Licença
 

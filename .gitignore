@@ -1,0 +1,4 @@
+# Planejamento local: nunca versionar
+planejamento.md
+.env
+node_modules/

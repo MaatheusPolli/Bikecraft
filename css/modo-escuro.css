@@ -1,0 +1,39 @@
+/* Modo escuro: segue a preferência do sistema (prefers-color-scheme).
+   Sobrescreve apenas cores de fundo e texto; as seções pretas e amarelas da marca mantêm o visual. */
+
+:root {
+	--cor-fundo: #fff;
+	--cor-texto: #1d1d1d;
+	--cor-campo: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		--cor-fundo: #121212;
+		--cor-texto: #f2f2f2;
+		--cor-campo: #1d1d1d;
+	}
+}
+
+:root[data-theme="dark"] {
+	--cor-fundo: #121212;
+	--cor-texto: #f2f2f2;
+	--cor-campo: #1d1d1d;
+}
+
+body {
+	background-color: var(--cor-fundo);
+	color: var(--cor-texto);
+}
+
+input,
+textarea,
+select {
+	background-color: var(--cor-campo);
+	color: var(--cor-texto);
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: #8a8a8a;
+}

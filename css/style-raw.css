@@ -119,7 +119,7 @@ img {
 .introducao {
 	width: 100%;
 	height: 380px;
-	background: url("../img/bg.jpg") no-repeat center;
+	background: image-set(url("../img/bg.webp") type("image/webp"), url("../img/bg.jpg") type("image/jpeg")) no-repeat center;
 	background-size: cover;
 	margin-top: 92px;
 	text-align: center;
@@ -318,7 +318,7 @@ img {
 .quebra {
 	width: 100%;
 	height: 220px;
-	background: url("../img/bg-footer.jpg") no-repeat center;
+	background: image-set(url("../img/bg-footer.webp") type("image/webp"), url("../img/bg-footer.jpg") type("image/jpeg")) no-repeat center;
 	background-size: cover;
 	text-align: center;
 	padding-top: 40px;

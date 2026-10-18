@@ -1,0 +1,17 @@
+{
+  "name": "bikecraft",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Site institucional estático da Bikecraft (estudo Origamid)",
+  "license": "SEE LICENSE IN LICENSE",
+  "scripts": {
+    "lint:html": "html-validate \"*.html\"",
+    "lint:css": "stylelint \"css/*.css\" --allow-empty-input",
+    "lint": "npm run lint:html && npm run lint:css"
+  },
+  "devDependencies": {
+    "html-validate": "^9.5.0",
+    "stylelint": "^16.10.0",
+    "stylelint-config-recommended": "^14.0.1"
+  }
+}
